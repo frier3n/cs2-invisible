@@ -1,6 +1,8 @@
 # CS2-invisible
 Player model Invisibility toggle counterstrikesharp plugin
 
+Thanks to [Juzlus/jRandomSkills](https://github.com/Juzlus/jRandomSkills) invisible code!
+
 # Command
 use: `!in playername, @me, @t or @ct`
 
