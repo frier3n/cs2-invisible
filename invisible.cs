@@ -15,8 +15,8 @@ namespace cssinvisible
 {
     public class InvisibleCommand : BasePlugin
     {
-        public override string ModuleName => "cssInvisible";
-        public override string ModuleVersion => "1.0.2";
+        public override string ModuleName => "Toggle Invisibility";
+        public override string ModuleVersion => "1.0.3";
         public override string ModuleAuthor => "r991";
         public override string ModuleDescription => "Inspired by Dima Invisible Players Videos";
 
@@ -88,7 +88,7 @@ namespace cssinvisible
 
             if (!AdminManager.PlayerHasPermissions(caller, Config.RequiredFlag))
             {
-                caller.PrintToChat(Prefix($"{Lang.NoPermission}"));
+                caller.PrintToChat(Prefix($" {ChatColors.Red}{Lang.NoPermission}"));
                 return;
             }
 
@@ -97,7 +97,7 @@ namespace cssinvisible
             if (arg == "@me")
             {
                 ToggleInvisibility(caller);
-                caller.PrintToChat(Prefix($"{Lang.YouToggled}"));
+                caller.PrintToChat(Prefix($" {ChatColors.Orange}{Lang.YouToggled}"));
                 return;
             }
 
@@ -109,7 +109,7 @@ namespace cssinvisible
                 foreach (var player in players)
                     ToggleInvisibility(player);
 
-                caller.PrintToChat(Prefix($"{Lang.TeamToggled.Replace("{team}", arg.ToUpper())}"));
+                caller.PrintToChat(Prefix($" {ChatColors.White}{Lang.TeamToggled.Replace("{team}", arg.ToUpper())}"));
                 return;
             }
 
@@ -118,12 +118,12 @@ namespace cssinvisible
 
             if (target == null)
             {
-                caller.PrintToChat(Prefix($"{Lang.PlayerNotFound}"));
+                caller.PrintToChat(Prefix($" {ChatColors.Red}{Lang.PlayerNotFound}"));
                 return;
             }
 
             ToggleInvisibility(target);
-            caller.PrintToChat(Prefix($"{Lang.TargetToggled.Replace("{player}", target.PlayerName)}"));
+            caller.PrintToChat(Prefix($" {ChatColors.Green}{Lang.TargetToggled.Replace("{player}", target.PlayerName)}"));
         }
 
         // INVISIBILITY
@@ -139,13 +139,13 @@ namespace cssinvisible
             {
                 SetVisibility(player, true);
                 invisiblePlayers.TryRemove(player.SteamID, out _);
-                player.PrintToChat(Prefix(Lang.NowVisible));
+                player.PrintToChat(Prefix($" {ChatColors.Yellow}{Lang.NowVisible}"));
             }
             else
             {
                 SetVisibility(player, false);
                 invisiblePlayers[player.SteamID] = true;
-                player.PrintToChat(Prefix(Lang.NowInvisible));
+                player.PrintToChat(Prefix($" {ChatColors.Green}{Lang.NowInvisible}"));
             }
         }
 
@@ -176,6 +176,7 @@ namespace cssinvisible
                 }
             }
         }
+
 
         [GameEventHandler]
         public HookResult OnPlayerSpawn(EventPlayerSpawn @event, GameEventInfo info)
@@ -214,7 +215,7 @@ namespace cssinvisible
 
         private static string Prefix(string message)
         {
-            return $"{Config.ChatPrefix} {message}";
+            return $" {ChatColors.Blue}{Config.ChatPrefix} {message}";
         }
     }
 
