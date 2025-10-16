@@ -16,7 +16,7 @@ namespace cssinvisible
     public class InvisibleCommand : BasePlugin
     {
         public override string ModuleName => "Toggle Invisibility";
-        public override string ModuleVersion => "1.0.3";
+        public override string ModuleVersion => "1.0.3-fix";
         public override string ModuleAuthor => "r991";
         public override string ModuleDescription => "Inspired by Dima Invisible Players Videos";
 
